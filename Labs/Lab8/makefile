@@ -12,10 +12,10 @@ term.o: term.cpp term.h
 	$(CC) $< -c $@
 
 TermSortingList.o: TermSortingList.cpp TermSortingList.h term.h
-	$(CC) TermSortingList.cpp term.cpp -c $@
+	$(CC) TermSortingList.cpp -c $@
 
 Lab8.o: Lab8.cpp term.h TermSortingList.h
-	$(CC) Lab8.cpp term.cpp TermSortingList.cpp -c $@
+	$(CC) Lab8.cpp -c $@
 
 
 clean:
