@@ -10,10 +10,10 @@ $(EXEC): $(OBJS)
 term.o: term.cpp term.h
 	$(CC) -c $<
 
-sortingList.o: SortingList.cpp SortingList.h
+SortingList.o: SortingList.cpp SortingList.h
 	$(CC) -c $<
 	
-autoComplete.o: autocomplete.cpp autocomplete.h SortingList.h term.h
+autocomplete.o: autocomplete.cpp autocomplete.h SortingList.h term.h
 	$(CC) -c $<
 
 Lab9.o: Lab9.cpp term.h SortingList.h autocomplete.h
