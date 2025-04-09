@@ -10,11 +10,15 @@
 // default constructor
 Term::Term()
 {
+    query = "";
+    weight = 0;
 }
 
 // initializes a term with the given query string and weight
 Term::Term(string query, long weight)
 {
+    this->query = query;
+    this->weight = weigth;
 }
 
 // compares the two terms in descending order by weight
@@ -23,6 +27,9 @@ Term::Term(string query, long weight)
 // otherwise return -1
 int Term::compareByWeight(Term T1, Term T2)
 {
+    if(T1.weight > T2.weight){return 1;}
+    else if (T1.weight == T2.weight){return 0;}
+    else {return -1;}
 }
 
 // compares the two terms in lexicographic order but using only the first r characters of each query
@@ -51,6 +58,7 @@ int Term::compareByPrefix(Term T1, Term T2, int r)
 // T1 < T2 if and only if the query of T1 is less than the query of T2 (based on string comparison)
 bool operator<(Term T1, Term T2)
 {
+    return (T1.query < T2.query);
 }
 
 // define the operator "<<" for Term class
@@ -58,4 +66,6 @@ bool operator<(Term T1, Term T2)
 // the weight, followed by a tab key, followed by the query
 ostream& operator<<(ostream &out, const Term& t)
 {
+    out << T.weight << "\t" << T.query;
+    return out;
 }
