@@ -9,13 +9,13 @@ $(EXEC): $(OBJS)
 	$(CC) $(OBJS) -o $@ 
 
 term.o: term.cpp term.h
-	$(CC) -c $@
+	$(CC) -c $<
 
 TermSortingList.o: TermSortingList.cpp TermSortingList.h term.h
-	$(CC) -c $@
+	$(CC) -c $<
 
 Lab8.o: Lab8.cpp term.h TermSortingList.h
-	$(CC) -c $@
+	$(CC) -c $<
 
 
 clean:
