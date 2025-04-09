@@ -1,7 +1,7 @@
 # makefile for Lab9
 
 EXEC = Lab9
-OBJS = Lab9.o term.o sortingList.o autoComplete.o
+OBJS = Lab9.o term.o SortingList.o autoComplete.o
 CC = /usr/bin/g++
 
 $(EXEC): $(OBJS)
@@ -10,13 +10,13 @@ $(EXEC): $(OBJS)
 term.o: term.cpp term.h
     $(CC) -c $<
 
-sortingList.o: sortingList.cpp sortingList.h term.h
+sortingList.o: SortingList.cpp SortingList.h
 	$(CC) -c $<
 	
-autoComplete.o: autoComplete.cpp autoComplete.h sortingList.h term.h
+autoComplete.o: autocomplete.cpp autocomplete.h SortingList.h term.h
 	$(CC) -c $<
 
-Lab9.o: Lab9.cpp term.h sortingList.h autoComplete.h
+Lab9.o: Lab9.cpp term.h SortingList.h autocomplete.h
     $(CC) -c $<
 
 clean:
