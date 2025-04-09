@@ -29,7 +29,7 @@ void Autocomplete::insert(Term newterm)
 // sort all the terms by query in the lexicographical order  
 void Autocomplete::sort()
 {
-    term.std_sort();
+    terms.std_sort();
 }
 
 // binary search helper function
@@ -69,7 +69,7 @@ int Autocomplete::binary_searchHelper(SortingList<Term> terms, string key, int l
 // Note that you may want a binary search helper function
 int Autocomplete::binary_search(string prefix)
 {
-    return binary_searchHelper(terms, prefix, 0, term.size()-1);
+    return binary_searchHelper(terms, prefix, 0, terms.size()-1);
 }
 
 // first: the index of the first query whose prefix matches
@@ -81,29 +81,54 @@ int Autocomplete::binary_search(string prefix)
 //        say hit, then look up and down from hit, to find first and last respectively
 void Autocomplete::search(string key, int& firstIndex, int& lastIndex)
 {
-    firstIndex = 0;
-    lastIndex = 0;
+    // set first and last Index to -1 as default
+    firstIndex = -1;
+    lastIndex = -1;
 
+    // search a key by binar_search, if no key term found, return
     int hit = binary_search(key);
-    if (hit == -1){return}
+    if (hit == -1){return;}
 
+    // if a key was found, set firstIndex and lastInde = hit
     firstIndex = hit;
-    Term Keyterm(key, 0);
+    lastIndex = hit;
+    // create a keyterm to compare for to the terms
+    Term keyterm(key, 0);
+    // set the length of prefix to the length fo current key length
     int r = key.length();
     
-    while(firstIndex > 0 && Term::compareByPrefix(keyterm, terms[firstIndex], r) ==0 ){
+     
+    while(firstIndex > 0 && Term::compareByPrefix(keyterm, terms[firstIndex-1], r) == 0){
         firstIndex --;
     }
-
-
+    
+    while(lastIndex < terms.size()-1 && Term::compareByPrefix(keyterm, terms[lastIndex+1], r) == 0){
+        lastIndex ++;
+    }
     
 }
 
 // returns all terms that start with the given prefix, in descending order of weight
 SortingList<Term> Autocomplete::allMatches(string prefix)
 {
+    // create first, last Index
+    int firstIndex, lastIndex;
+    // use search function to change first, last index to vaild index
+    search(prefix, firstIndex, lastIndex);
+    // create a result terms
+    SortingList<Term> resultTerm;
+    // if first or last Index == -1, the index is not vaild, return empty terms
+    if (firstIndex == -1 || lastIndex == -1){return resultTerm;}
+    // else, add all term from terms to the result term
+    for(int i = firstIndex; i <= lastIndex; i++){
+        resultTerm.insert(terms[i]);
+    }
+    // sort terms by descending order of weight
+    resultTerm.selection_sort(Term::compareByWeight);
+    return resultTerm;
 }
 
 void Autocomplete::print()
 {
+    terms.print();
 }
