@@ -7,7 +7,7 @@
 #include <iostream>
 #include "autocomplete.h"
 
-use namespace std;
+using namespace std;
 
 // default constructor
 Autocomplete::Autocomplete()
@@ -22,14 +22,14 @@ Autocomplete::Autocomplete()
 //          represents the sequence
 void Autocomplete::insert(Term newterm)
 {
-    term.insert(newterm);
+    terms.insert(newterm);
 }
 
 
 // sort all the terms by query in the lexicographical order  
 void Autocomplete::sort()
 {
-    term.sort()
+    term.std_sort();
 }
 
 // binary search helper function
@@ -69,7 +69,7 @@ int Autocomplete::binary_searchHelper(SortingList<Term> terms, string key, int l
 // Note that you may want a binary search helper function
 int Autocomplete::binary_search(string prefix)
 {
-    return binary_searchHelper(term, prefix, 0, term.size()-1)
+    return binary_searchHelper(terms, prefix, 0, term.size()-1);
 }
 
 // first: the index of the first query whose prefix matches
@@ -81,11 +81,20 @@ int Autocomplete::binary_search(string prefix)
 //        say hit, then look up and down from hit, to find first and last respectively
 void Autocomplete::search(string key, int& firstIndex, int& lastIndex)
 {
-    firstIndex = -1;
-    lastIndex = -1;
+    firstIndex = 0;
+    lastIndex = 0;
 
     int hit = binary_search(key);
-    if (hit == -1){return -1;}
+    if (hit == -1){return}
+
+    firstIndex = hit;
+    Term Keyterm(key, 0);
+    int r = key.length();
+    
+    while(firstIndex > 0 && Term::compareByPrefix(keyterm, terms[firstIndex], r) ==0 ){
+        firstIndex --;
+    }
+
 
     
 }
