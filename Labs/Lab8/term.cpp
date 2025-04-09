@@ -18,7 +18,7 @@ Term::Term()
 Term::Term(string query, long weight)
 {
     this->query = query;
-    this->weight = weigth;
+    this->weight = weight;
 }
 
 // compares the two terms in descending order by weight
@@ -66,6 +66,6 @@ bool operator<(Term T1, Term T2)
 // the weight, followed by a tab key, followed by the query
 ostream& operator<<(ostream &out, const Term& t)
 {
-    out << T.weight << "\t" << T.query;
+    out << t.weight << "\t" << t.query;
     return out;
 }
