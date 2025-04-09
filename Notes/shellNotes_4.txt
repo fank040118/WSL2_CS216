@@ -1,0 +1,83 @@
+位置参数Positional Parameters——————————————————————————————————————————
+命令名称和参数被称为位置参数
+之所以称为位置参数，是因为可以通过它们在命令行中的位置来引用它们
+比如运行脚本时以 ./脚本名 参数1 参数2
+那么 参数1 和 参数2 都是位置参数
+
+比如：
+    $# 参数的总数
+    $* 所有使用的参数列表
+    $0 调用shell脚本的名称
+    $1到$9 按位置输入的命令行参数
+
+    举例————————————
+./ file para1 para2
+
+#!/bin/bash
+echo "There are $# parameters."    输出There are 2 parameters.
+echo "The parameters are $*."      输出paramaters are para1 para2
+echo "The script name is $0."      输出script name is file
+echo "The first parameter is $1."  输出The first parameter is para1.
+exit 0
+
+特殊参数Special Parameters————————————————————————————————————————————
+位置参数是特殊参数的一种，详细来说：
+    $# 是特殊参数，返回十进制数，大小为参数量，如果直接运行脚本不加参数就是0
+    $* 是特殊参数，将所有参数名作为一个整体字符串返回，不可修改
+    $? 是退出状态，如果子进程停止执行，会向父进程返回状态，它的值由脚本结尾的 exit x 的x定义
+        非0代表命令失败，0代表成功执行
+
+引号Quotes——————————————————————————————————————————————————————
+单引号'
+    保留空格
+    抑制字符的特殊含义，不允许变量替换，所有字符都会按字面意义读取
+    单引号里无法使用另一个单引号，反斜杠转译也不行
+
+双引号"
+    保留空格
+    抑制字符的特殊含义，但$ \ `除外，仍然允许变量替换，其他字符按字面意义读取
+    双引号内允许使用双引号，可以用反斜杠让它们变成字面意义
+
+反引号`
+    用于执行包含在其中的命令
+
+    举例—————————————
+#!/bin/bash
+name = "Yi Pike"
+echo -n "Hello, "; whoami    输出 Hello, yluo2    (echo后面接-n代表禁止在文本输出后添加换行)
+echo "Hello, " `whoami`      输出 Hello, yluo2
+echo "Hello, $name"          输出 Hello, Yi Pike
+exit 0
+
+#!/bin/bash
+coursename="CS216"
+echo 'Hello, $coursename students!'       输出 Hello, $coursename students!
+echo "Hello, $coursename students!"       输出 Hello, CS216 students！
+echo "It's fun to take \"$coursename\"."  输出 It's fun to take "CS216".
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

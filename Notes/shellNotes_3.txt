@@ -1,0 +1,57 @@
+case语句——————————————————————————————————————
+case语法为：
+case 变量 in
+    模式1) 
+        statements;;
+    模式2) 
+        statements;;
+    模式3)
+        statements;;
+    ...
+    *)
+        默认命令;;
+esac
+
+case语句的变量名后面接in，每个命令块都需要;;结束，每个分支用)结尾，case结尾用esac结尾
+
+while循环—————————————————————————————————————
+while [ 条件 ]
+do
+    statements
+done
+
+for循环———————————————————————————————————————
+for 变量 in $(unix 命令)
+    do
+        statements
+    done
+
+或
+for 变量 in 列表
+    do
+        statements
+    done
+
+或
+for ((i=0; i < 条件; i++))
+    do
+        statments
+    done
+
+    举例————————
+for num in {4,3,2,1}
+do 
+    echo "Number: $num"
+done
+
+
+
+
+
+
+
+
+
+
+
+
