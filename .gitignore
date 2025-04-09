@@ -1,0 +1,5 @@
+# 忽略SSH密钥文件
+SSH_Saves
+SSH_Saves.pub
+*/.ssh/
+*.swp
