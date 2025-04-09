@@ -1,25 +1,26 @@
 # makefile for Lab8
 
 EXEC = Lab8
+OBJS = Lab8.o term.o TermSortingList.o 
 CC = /usr/bin/g++
 FLAG = -g -Wall
 
 
+$(EXEC): $(OBJS)
+	$(CC) $(OBJS) -c $@ 
+
 term.o: term.cpp term.h
-	$(CC) $< -o $@
+	$(CC) $< -c $@
 
 TermSortingList.o: TermSortingList.cpp TermSortingList.h term.cpp term.cpp
-	$(CC) TermSortingList.cpp term.cpp -o $@
+	$(CC) TermSortingList.cpp term.cpp -c $@
 
 Lab8.o: Lab8.cpp term.cpp term.h TermSortingList.cpp TermSortingList.h
-	$(CC) Lab8.cpp term.cpp TermSortingList.cpp -o $@
+	$(CC) Lab8.cpp term.cpp TermSortingList.cpp -c $@
 
 
-%.o : %.cpp
-	$(CC) $(FLAG) -c $^
-
-clean :
-    rm -i *.o core
+clean:
+	rm -i *.o core
 
 
 
