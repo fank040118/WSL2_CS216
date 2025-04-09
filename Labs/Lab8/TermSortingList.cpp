@@ -16,17 +16,20 @@
 // inserts the newitem to the end of the current vector   
 void TermSortingList::insert(Term newitem)
 {
+    this->push_back(newitem);
 }
 
 // return how many items in the list
 int TermSortingList::size() const
 {
+    return (this->size());
 }
 
 // operator overloading for "[]"
 // provide the direct access by index number
 Term& TermSortingList::operator[](int index)
 {
+    return this->[index];
 }
 
 // sort all items in ascending order 
@@ -34,6 +37,7 @@ Term& TermSortingList::operator[](int index)
 // using std::sort() from STL
 void TermSortingList::std_sort()
 {
+    sort(this->begin(), this->end());
 }
 
 // provide different sorting algorithms 
