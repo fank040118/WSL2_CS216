@@ -37,7 +37,7 @@ Term& TermSortingList::operator[](int index)
 // using std::sort() from STL
 void TermSortingList::std_sort()
 {
-    sort(items.begin(), itesm.end());
+    sort(items.begin(), items.end());
 }
 
 // provide different sorting algorithms 
