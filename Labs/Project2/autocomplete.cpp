@@ -97,7 +97,7 @@ void Autocomplete::search(string key, int& firstIndex, int& lastIndex)
     // set the length of prefix to the length fo current key length
     int r = key.length();
     
-     
+    // keep loop until reach the first term that doesn't match     
     while(firstIndex > 0 && Term::compareByPrefix(keyterm, terms[firstIndex-1], r) == 0){
         firstIndex --;
     }

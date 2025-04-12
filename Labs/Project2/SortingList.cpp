@@ -112,7 +112,7 @@ void SortingList<T>::shuffle()
         swap(items[i], items[j]);		
     } 
 }
-
+/*
 // display all the items
 template <typename T>
 void SortingList<T>::print() const
@@ -123,6 +123,14 @@ void SortingList<T>::print() const
     }
     cout<<endl;
 }
+*/
+
+template <typename T>
+void SortingList<T>::print() const
+{
+    cout << terms.at(0);
+}
+
 
 // helper functions
 template <typename T>

@@ -85,8 +85,15 @@ int main(int argc, char** argv) {
             cout << "No matched query!" << endl;
         }
         else
-        {
-            matchedTerms.print();
+        {   
+            cout << "Please input how many terms you want to see: ";
+            int user_rows;
+            cin >> user_rows;
+            // 占位符，打算在这写一个检测是否是有效数的代码
+            matchedTerms_2 = autocomplete.allMatches(prefix);
+            for(int i = 0; i < user_rows; i++){
+                matchedTerms_2.print();
+            }
         }
 
         cout << "Please input the search query (type \"exit\" to quit): " << endl;
