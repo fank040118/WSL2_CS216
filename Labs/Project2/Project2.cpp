@@ -27,7 +27,7 @@ int main(int argc, char** argv) {
     if (argc != ARGUMENTS+1)
     {
         cout << "need exactly " << ARGUMENTS << " command line arguments." << endl;
-        cout << "Usage: " << "./" << argv[0] << " <filename>" << " number" << endl;
+        cout << "Usage: " << argv[0] << " <filename>" << " number" << endl;
         return 1;
     }    
     
@@ -109,7 +109,7 @@ int main(int argc, char** argv) {
 
     // print exit info
     cout << "Thank you for using \" You Autocomplete Me \" engine in CS216!" << '\n'
-         << "It is written by Anthony Wang in CS216 Section 005." << endl;
+         << "It is written by Anthony Wang in CS216 Section 002." << endl;
 
     return 0;
 }
