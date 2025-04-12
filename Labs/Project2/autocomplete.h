@@ -51,7 +51,7 @@ class Autocomplete
         SortingList<Term> allMatches(string prefix);
 
         // display all the terms in the sequence
-        void print();
+        void print() const;
 
     private:
         SortingList<Term> terms;

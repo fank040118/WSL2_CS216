@@ -128,7 +128,7 @@ SortingList<Term> Autocomplete::allMatches(string prefix)
     return resultTerm;
 }
 
-void Autocomplete::print()
+void Autocomplete::print() const
 {
     terms.print();
 }

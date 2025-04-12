@@ -1,0 +1,25 @@
+注意：文中所有"*******"实际上都是对齐了的（每行的*******在相同位置，这一效果并未在以下文本中展示出来）。
+
+$ ./Project2 actors.txt 4
+******* Enjoy CS216 search engine! *******
+******* You Autocomplete Me *******
+Please input the search query (type "exit" to quit): 
+Emma
+2580192375 Emma Watson (II)
+2171702719 Emma Thompson (I)
+1209880667 Emma Stone (III)
+623476184 Emma Raimi
+******* Enjoy CS216 search engine! *******
+******* You Autocomplete Me *******
+Please input the search query (type "exit" to quit): 
+Emma W
+2580192375 Emma Watson (II)
+366650930 Emma Wetzel
+200069408 Emma Whittaker (I)
+94120257 Emma Walton
+******* Enjoy CS216 search engine! *******
+******* You Autocomplete Me *******
+Please input the search query (type "exit" to quit): 
+exit
+Thank you for using " You Autocomplete Me " engine in CS216!
+It is written by Yi Pike in CS216 Section 00x.

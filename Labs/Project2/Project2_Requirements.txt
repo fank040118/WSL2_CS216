@@ -1,0 +1,128 @@
+自动完成项目（Autocomplete Me）内容概述
+项目概述
+编写一个C++程序来实现"Autocomplete Me"功能，为给定的N个术语（其中术语是查询字符串和相关的非负权重）集合。给定一个前缀，找到所有以该前缀开头的查询，按权重降序排列。
+实现方法
+本项目通过以下步骤实现"Autocomplete Me"：
+
+首先按查询字符串对术语进行排序
+然后使用二分查找找到所有以给定前缀开始的查询字符串
+最后通过按权重降序排序匹配的术语生成输出列表
+
+
+————————————————————————————————————————————
+Part 1: "Autocomplete Me" term
+定义一个名为Term的类，表示自动完成术语：一个查询字符串和相关的整数权重。
+需要提供三个成员函数，分别支持按三种不同排序标准比较术语：
+
+按查询字符串的字典顺序（通过运算符"<"重载）
+按权重降序排列（静态成员函数）
+按查询字符串的前r个字符的字典顺序（静态成员函数）
+
+第一个排序标准通过运算符"<"重载定义。其他两个排序标准都定义为静态成员函数，每个函数返回一个整数值：1, 0或-1。当比较两个术语时，如果按照排序标准第一个术语和第二个术语顺序正确，返回1；如果顺序相反，返回-1；如果相同，返回0。
+Term类声明：
+cppclass Term
+{
+ public:
+ // 默认构造函数
+ Term();
+ // 使用给定的查询字符串和权重初始化
+ Term(string query, long weight);
+ // 按权重降序比较两个术语
+ // 如果t1和t2按权重降序排列，返回1
+ // 如果它们权重相同，返回0
+ // 否则，返回-1
+ static int compareByWeight(Term t1, Term t2);
+ // 仅使用每个查询的前r个字符按字典顺序比较两个术语
+ // 如果t1和t2的前r个字符按字典顺序排列，返回1
+ // 如果它们的前r个字符相同，返回0
+ // 否则，返回-1
+ static int compareByPrefix(Term t1, Term t2, int r);
+ // 为Term类定义运算符"<"（作为友元函数）
+ friend bool operator<(Term t1, Term t2);
+ // 为Term类定义运算符"<<"（作为友元函数）
+ // 使其可以直接将Term对象发送到cout，格式如下：
+ // 权重后跟一个制表符，然后是查询
+ friend ostream& operator<<(ostream& out, const Term& t);
+ // 将"友谊"分配给名为Autocomplete的类
+ // 以便Autocomplete类可以直接访问Term类的私有数据成员
+ // 不是反过来。
+ friend class Autocomplete;
+ private:
+ string query;
+ long weight;
+};
+
+——————————————————————————————————————————
+Part 2: Autocomplete Me
+定义一个名为Autocomplete的类，为给定的Term对象集提供"Autocomplete Me"功能。
+使用二分查找算法高效地找到所有以给定前缀开头的查询字符串（匹配的术语），然后按权重降序排列匹配的术语。
+步骤：
+
+首先按查询的字典顺序对术语进行排序
+使用二分查找从已排序的序列中搜索给定前缀
+对于给定的前缀，由于匹配的术语可能不止一个，需要获取序列中的第一个和最后一个这样的术语
+实现search()函数：void search(string prefix, int& firstIndex, int& lastIndex);
+
+firstIndex和lastIndex是引用参数，表示匹配给定前缀的第一个查询的索引和最后一个查询的索引
+如果找不到这样的前缀，则为-1
+
+
+按权重降序排列匹配的术语（从索引firstIndex到lastIndex）
+
+Autocomplete类声明：
+cppclass Autocomplete
+{
+ public:
+ // 默认构造函数
+ Autocomplete(); 
+ // 将新术语插入序列
+ // 注意SortingList<Term>对象terms代表序列
+ void insert(Term newterm);
+ // 按字典顺序对所有术语按查询排序
+ // 注意此函数需要在应用二分查找之前调用
+ void sort();
+ // 使用二分查找算法返回查询前缀匹配给定前缀的术语的索引号
+ // 注意二分查找只能应用于已排序的序列
+ // 注意你可能需要一个二分查找辅助函数
+ int binary_search(string prefix);
+ // first：前缀匹配搜索键的第一个查询的索引，如果没有则为-1
+ // last：前缀匹配搜索键的最后一个查询的索引，如果没有则为-1
+ // key：要匹配的给定前缀
+ // 提示：你可以先调用binary_search()找到一个匹配的索引号，
+ // 然后从该索引向上和向下查找，分别找到first和last
+ void search(string key, int& first, int& last);
+ // 返回所有查询匹配给定前缀的术语，按权重降序排列
+ SortingList<Term> allMatches(string prefix);
+ // 显示序列中的所有术语
+ void print() const;
+ // 您可能需要的其他成员函数...
+ 
+ private:
+ SortingList<Term> terms;
+ // 二分查找辅助函数
+ // 作为私有函数
+ // 因为它只服务于binary_search成员函数
+ int binary_searchHelper(SortingList<Term> terms, string 
+ key, int left_index, int right_index);
+};
+
+————————————————————————————————————————————————
+输入格式
+可下载多个样本输入文件进行测试。每个文件包含N对非负权重和查询字符串。每行一对，权重和查询由制表符分隔。
+程序要求
+
+运行程序时应接受输入文件名和整数k作为命令行参数
+读取文件数据后，反复要求用户输入自动完成查询
+按权重降序打印出前k个匹配术语
+直到用户输入"exit"退出
+如果只有j个匹配术语（0 < j < k），则按权重降序打印出前j个匹配术语
+
+————————————————————————————————————————————————
+实现注意事项
+
+必须使用文档中描述的Term类声明，以及二分查找算法来找到所有以给定前缀开头的查询字符串
+必须使用文档中描述的Autocomplete类声明，但允许添加其他成员函数
+不得修改从教师网站下载的SortingList类声明
+数据结构和算法的决策应基于应用程序：数据项的大小和将对这些数据项执行的操作组合
+程序开始时不应提示用户输入，应在从输入文件读取数据后才开始要求用户输入
+SortingList类中实现了几种排序算法作为成员函数，可以选择调用哪一个函数来适应你对数据项序列应用的排序操作

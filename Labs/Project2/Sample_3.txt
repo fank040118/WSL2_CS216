@@ -1,0 +1,93 @@
+注意：文中所有"*******"实际上都是对齐了的（每行的*******在相同位置，这一效果并未在以下文本中展示出来）。
+
+$ ./Project2 imdb.txt 10
+******* Enjoy CS216 search engine! *******
+******* You Autocomplete Me *******
+Please input the search query (type "exit" to quit): 
+Harry Potter
+384098 Harry Potter and the Deathly Hallows: Part 2 (2011)
+347615 Harry Potter and the Sorcerer's Stone (2001)
+305471 Harry Potter and the Chamber of Secrets (2002)
+304275 Harry Potter and the Goblet of Fire (2005)
+298817 Harry Potter and the Prisoner of Azkaban (2004)
+279603 Harry Potter and the Order of the Phoenix (2007)
+253710 Harry Potter and the Deathly Hallows: Part 1 (2010)
+246812 Harry Potter and the Half-Blood Prince (2009)
+993 Harry Potter and the Forbidden Journey (2010)
+442 Harry Potter: Witchcraft Repackaged (2001) (V)
+******* Enjoy CS216 search engine! *******
+******* You Autocomplete Me *******
+Please input the search query (type "exit" to quit): 
+Star War
+675029 Star Wars (1977)
+605021 Star Wars: Episode V - The Empire Strikes Back (1980)
+480393 Star Wars: Episode VI - Return of the Jedi (1983)
+401231 Star Wars: Episode I - The Phantom Menace (1999)
+387721 Star Wars: Episode III - Revenge of the Sith (2005)
+343420 Star Wars: Episode II - Attack of the Clones (2002)
+33212 Star Wars: The Clone Wars (2008)
+900 Star Wars: Revelations (2005) (V)
+381 Star Wars: A Musical Journey (2005) (V)
+132 Star Wars XXX: A Porn Parody (2012) (V)
+******* Enjoy CS216 search engine! *******
+******* You Autocomplete Me *******
+Please input the search query (type "exit" to quit): 
+Up
+467779 Up (2009)
+233936 Up in the Air (2009/I)
+46309 Upside Down (2012/I)
+24773 Uptown Girls (2003)
+24394 Up in Smoke (1978)
+14081 Upstream Color (2013)
+9990 Up Close & Personal (1996)
+2163 Up at the Villa (2000)
+1862 Up! (1976)
+1847 Up the Creek (1984)
+******* Enjoy CS216 search engine! *******
+******* You Autocomplete Me *******
+Please input the search query (type "exit" to quit): 
+Gone
+183587 Gone in Sixty Seconds (2000)
+171036 Gone with the Wind (1939)
+158166 Gone Baby Gone (2007)
+28906 Gone (2012/I)
+7328 Gone Fishin' (1997)
+5457 Gone in 60 Seconds (1974)
+3127 Gone (2006/VI)
+2053 Gone Nutty (2002) (V)
+1029 Gone, But Not Forgotten (2003)
+700 Gone (2002)
+******* Enjoy CS216 search engine! *******
+******* You Autocomplete Me *******
+Please input the search query (type "exit" to quit): 
+Zoo
+154239 Zoolander (2001)
+36625 Zookeeper (2011)
+12506 Zoom (2006)
+2009 Zoo (2007)
+739 Zoot Suit (1981)
+397 Zoom and Bored (1957)
+358 Zoo (2005)
+277 Zoo (1962)
+276 Zoo in Budapest (1933)
+259 Zoop in Afrika (2005)
+******* Enjoy CS216 search engine! *******
+******* You Autocomplete Me *******
+Please input the search query (type "exit" to quit): 
+Am
+643948 American Beauty (1999)
+596022 American History X (1998)
+283491 American Psycho (2000)
+282170 American Gangster (2007)
+268410 American Pie (1999)
+247016 American Hustle (2013)
+211390 Amadeus (1984)
+168137 American Pie 2 (2001)
+146240 American Reunion (2012)
+138841 Amores perros (2000)
+******* Enjoy CS216 search engine! *******
+******* You Autocomplete Me *******
+Please input the search query (type "exit" to quit): 
+exit
+Thank you for using " You Autocomplete Me " engine in CS216!
+It is written by Yi Pike in CS216 Section 00x.
