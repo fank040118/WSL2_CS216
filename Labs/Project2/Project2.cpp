@@ -19,7 +19,7 @@
 using namespace std;
 
 int main(int argc, char** argv) {
-    const int ARGUMENTS = 1;
+    const int ARGUMENTS = 2;
     
     // check the command line argument, an input file name is needed
     if (argc != ARGUMENTS+1)
@@ -36,7 +36,12 @@ int main(int argc, char** argv) {
     {
         cout << "Cannot open the file named " << argv[1] << endl;
         return 2;
-    }  
+    }
+
+    // check if the second argument is vaild
+    if (argv[2])
+
+
     
     // read in the terms from the input file
     // line by line and store into Autocomplete object
@@ -78,31 +83,37 @@ int main(int argc, char** argv) {
         SortingList<Term> matchedTerms = autocomplete.allMatches(prefix);
         tstop = clock();
         double  elapsed = (double)(tstop-tstart)/CLOCKS_PER_SEC;
-        cout << "Time for searching the maximum three of matched terms: "<<  elapsed << " seconds." << endl;
+        cout << "Time for searching all matched terms: "<<  elapsed << " seconds." << endl;
         
         if (matchedTerms.size() == 0)
         {    
             cout << "No matched query!" << endl;
         }
         else
-        {   
-            cout << "Please input how many terms you want to see: ";
-            int user_rows;
-            cin >> user_rows;
+        {  
+            while(true){
+                cout << "Please input how many terms you want to see: ";
+                int user_rows;
+                cin >> user_rows;
             
-            if(cin.flag()){
-                cout << "Please input a number!" << endl;
-                cin.clear();
-                cin.ignore(1000,'\n');
-            }
-            else{
-
-                for(int i = 0; i < user_rows; i++){
-                    matchedTerms[i].print();
+                if(cin.fail()){
+                    cout << "Please input a number!" << endl;
+                    cin.clear();
+                    cin.ignore(1000,'\n');
+                }
+                else{
+                    if(user_rows <= 0 || user_rows > matchedTerms.size()){
+                        cout << "Please input a vaild number!" << endl;
+                    }
+                    else{
+                        for(int i = 0; i < user_rows; i++){
+                            cout << matchedTerms[i] << endl;
+                        }
+                        break;
+                    }
                 }
             }
         }
-
         cout << "Please input the search query (type \"exit\" to quit): " << endl;
         getline(cin, input);
         prefix = input;
