@@ -89,10 +89,17 @@ int main(int argc, char** argv) {
             cout << "Please input how many terms you want to see: ";
             int user_rows;
             cin >> user_rows;
-            // 占位符，打算在这写一个检测是否是有效数的代码
-            matchedTerms_2 = autocomplete.allMatches(prefix);
-            for(int i = 0; i < user_rows; i++){
-                matchedTerms_2.print();
+            
+            if(cin.flag()){
+                cout << "Please input a number!" << endl;
+                cin.clear();
+                cin.ignore(1000,'\n');
+            }
+            else{
+
+                for(int i = 0; i < user_rows; i++){
+                    matchedTerms[i].print();
+                }
             }
         }
 
