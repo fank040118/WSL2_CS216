@@ -1,6 +1,6 @@
 /*
  * Course: CS216-002
- * Project: Project2
+ * Project: PA2
  * Purpose: repeatedly ask the user to type prefix to match
  *          and generate all the prefix-matched terms 
  *          then display the prefix-matched terms in descending order by weight.
@@ -113,4 +113,3 @@ int main(int argc, char** argv) {
 
     return 0;
 }
-
