@@ -1,9 +1,19 @@
+/*
+* File: Graph.cpp
+* Course: CS216-002
+* Project: Lab 11
+* Purpose: Declaration of Graph class
+*          This class represents an undirected Graph (no weight on each edge)
+*          using adjacent map representation
+*          It contains one private data memeber: adjMap
+*          which represents the mapping from a Vertex, say u (key) to a set of vertices (value) which directly connect to u
+* Editor: Anthony Wang 
+*/
+
+
 #include "Graph.h"
 #include <queue>
-#include <string>
-#include <map>
 #include <set>
-#include <iostream>
 
 using namespace std;
 
