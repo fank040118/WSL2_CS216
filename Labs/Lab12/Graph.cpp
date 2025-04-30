@@ -22,22 +22,22 @@ Graph::Graph(){
     adjMap = {};
 }
 
-bool Graph::hasEdge(char v, char w) const{
+bool Graph::hasEdge(char v& v1, char v& v2) const{
     // if v dose not appear in adjMap, return false
-    if(adjMap.find(v) == adjMap.end()){
+    if(adjMap.find(v1) == adjMap.end()){
         return false;
     }
     // else, return (is w a adjacent of v)
-    return adjMap.at(v).find(w) != adjMap.at(v).end();
+    return adjMap.at(v1).find(v2) != adjMap.at(v1).end();
 }
 
-void Graph::addEdge(char v, char w){
+void Graph::addEdge(char v& v1, char v& v2){
     // insert v and w to each other's pair
-    adjMap[v].insert(w);
-    adjMap[w].insert(v);
+    adjMap[v].insert(v1);
+    adjMap[w].insert(v2);
 }
 
-int Graph::BFS(char s, char t, map<char, int>& distance, map<char, char>& go_through) const{
+int Graph::BFS(char v& s, char v& t, map<char, int>& distance, map<char, char>& go_through) const{
     // return -2 if least one of them are not in adjMap
     if(adjMap.find(s) == adjMap.end() || adjMap.find(t) == adjMap.end()){return INVALID_VERTEX;}
 
@@ -75,27 +75,4 @@ int Graph::BFS(char s, char t, map<char, int>& distance, map<char, char>& go_thr
     // else, return distance of t to s
     return distance[t];
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

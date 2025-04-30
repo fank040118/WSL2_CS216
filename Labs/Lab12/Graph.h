@@ -12,7 +12,7 @@
 #ifndef GRAPH_H
 #define GRAPH_H
 
-template <class Graph>
+template <typename v>
 
 #include <map>
 #include <set>
@@ -29,10 +29,10 @@ class Graph
     Graph();
     
     // to check if an edge exists between v and w
-    bool hasEdge(char v, char w) const;  
+    bool hasEdge(char v& v1, char v& v2) const;  
     
     // to add an edge beween v and w to the graph
-    void addEdge(char v, char w);
+    void addEdge(char v& v1, char v& v2);
 
     // Apply BFS traversal to find the shortest path from the given source s to destination t
     // return the distnace from s to t
@@ -41,11 +41,12 @@ class Graph
     // store the shortest path distance from the given source s  to vertex w in distance map<w, distance>
     // store which next vertex to go through on the shortest path to the given source s in go_through map<w, v>. 
     // Here a pair <w, v> in go_through map represents on the shortest path from w to the given source s, it needs to take the path: w-->v...-->s  
-    int BFS(char s, char t, map<char, int>& distance, map<char, char>& go_through) const;
+    int BFS(char v& s, char v& t, map<char, int>& distance, map<char, char>& go_through) const;
    
    private:    
     //represent the mapping from a Vertex, say u (key) to a set of vertices (value) which directly connect to u 
     map<char, set<char> > adjMap;        
 };
 
-#endif   /* GRAPH_H */
+#endif
+#include "Graph.cpp"
