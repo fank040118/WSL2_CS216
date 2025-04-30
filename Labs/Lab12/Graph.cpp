@@ -37,10 +37,11 @@ bool Graph<T>::hasEdge(const T& v1, const T& v2) const{
 template <typename T>
 void Graph<T>::addEdge(const T& v1, const T& v2){
     // insert v1 and v2 to each other's pair
-    adjMap[v1].insert(v1);
-    adjMap[v2].insert(v2);
+    adjMap[v1].insert(v2);
+    adjMap[v2].insert(v1);
 }
 
+template <typename T>
 int Graph<T>::BFS(const T& s, const T& t, map<T, int>& distance, map<T, T>& go_through) const{
     // return -2 if least one of them are not in adjMap
     if(adjMap.find(s) == adjMap.end() || adjMap.find(t) == adjMap.end()){return INVALID_VERTEX;}
@@ -64,7 +65,7 @@ int Graph<T>::BFS(const T& s, const T& t, map<T, int>& distance, map<T, T>& go_t
         q.pop();
         // loop from all unvisited adjacent of current, add them to queue
         // add path of w -> current to go_through, distance of w = current+1
-        for(T& w:adjMap.at(current)){
+        for(const T& w:adjMap.at(current)){
             if(distance[w] == -1){
                 distance[w] = distance[current]+1;
                 go_through[w] = current;

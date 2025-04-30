@@ -14,12 +14,12 @@
 #include <map>
 #include <set>
 
-template <typename T>
-
 using namespace std;
- 
+
 const int NOPATH = -1;
 const int INVALID_VERTEX = -2;
+
+template <typename T>
 
 class Graph
 {

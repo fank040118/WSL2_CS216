@@ -1,5 +1,5 @@
 /*
- *course: CS216-00x
+ *course: CS216-002
  *Project: Lab 12
  *Purpose: to demonstrate a simple Word Ladder, using four-letter words as examples 
  *         create a graph from reading the collection of words in an input file
@@ -9,7 +9,7 @@
  *         which is the distance of the shortest path from the source to the destination in the Graph
  *         then display the "Word Ladder" from word1 to word2, which is
  *         the shortest path from the source to the destination in the Graph
- *Author: (your name)
+ *Author: Anthony Wang
  */
 
 #include <iostream>
@@ -112,15 +112,21 @@ int main(int argc, char* argv[])
             cout << "A ladder from [" << word1 << "] to [" << word2 << "]:" << endl;
             // your code starts here...
 
+            stack<string> path; // create a stack to reverse path to word1 to word2
+            string currentWord = word2; // push word2 as the last element to path
+            while(currentWord != word1){
+                path.push(currentWord);
+                currentWord = go_through[currentWord];  // push whole path from word2 to word1 into stack
+            }
+            path.push(word1); // push word1 into stack
 
-
-
-
-
-
-
-
-
+            cout << path.top(); // print word1 first
+            path.pop();
+            while(!path.empty()){ // while path != empty, print path till word2
+                cout << " ---> " << path.top();
+                path.pop();
+            }  
+            cout << endl;
         }   
     }
 
