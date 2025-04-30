@@ -9,7 +9,8 @@
 *          which represents the mapping from a Vertex, say u (key) to a set of vertices (value) which directly connect to u
 * Editor: Anthony Wang 
 */
-
+#ifndef GRAPH_CPP
+#define GRAPH_CPP
 
 #include "Graph.h"
 #include <queue>
@@ -17,27 +18,28 @@
 
 using namespace std;
 
+template <typename T>
 Graph::Graph(){
     // default constructor
     adjMap = {};
 }
 
-bool Graph::hasEdge(char v& v1, char v& v2) const{
-    // if v dose not appear in adjMap, return false
+bool Graph::hasEdge(T& v1, T& v2) const{
+    // if v1 dose not appear in adjMap, return false
     if(adjMap.find(v1) == adjMap.end()){
         return false;
     }
-    // else, return (is w a adjacent of v)
+    // else, return (is v2 a adjacent of v1)
     return adjMap.at(v1).find(v2) != adjMap.at(v1).end();
 }
 
-void Graph::addEdge(char v& v1, char v& v2){
-    // insert v and w to each other's pair
+void Graph::addEdge(T& v1, T& v2){
+    // insert v1 and v2 to each other's pair
     adjMap[v].insert(v1);
     adjMap[w].insert(v2);
 }
 
-int Graph::BFS(char v& s, char v& t, map<char, int>& distance, map<char, char>& go_through) const{
+int Graph::BFS(T& s, T& t, map<T, int>& distance, map<T, T>& go_through) const{
     // return -2 if least one of them are not in adjMap
     if(adjMap.find(s) == adjMap.end() || adjMap.find(t) == adjMap.end()){return INVALID_VERTEX;}
 
@@ -49,7 +51,7 @@ int Graph::BFS(char v& s, char v& t, map<char, int>& distance, map<char, char>& 
         distance[vertex.first] = -1;
     }
     
-    queue<char> q;
+    queue<T> q;
     distance[s] = 0; // set distance of itself to 0
     go_through[s] = s;
     q.push(s);
@@ -60,7 +62,7 @@ int Graph::BFS(char v& s, char v& t, map<char, int>& distance, map<char, char>& 
         q.pop();
         // loop from all unvisited adjacent of current, add them to queue
         // add path of w -> current to go_through, distance of w = current+1
-        for(char w:adjMap.at(current)){
+        for(T& w:adjMap.at(current)){
             if(distance[w] == -1){
                 distance[w] = distance[current]+1;
                 go_through[w] = current;
