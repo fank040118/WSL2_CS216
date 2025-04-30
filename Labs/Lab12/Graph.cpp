@@ -19,12 +19,13 @@
 using namespace std;
 
 template <typename T>
-Graph::Graph(){
+Graph<T>::Graph(){
     // default constructor
     adjMap = {};
 }
 
-bool Graph::hasEdge(T& v1, T& v2) const{
+template <typename T>
+bool Graph<T>::hasEdge(const T& v1, const T& v2) const{
     // if v1 dose not appear in adjMap, return false
     if(adjMap.find(v1) == adjMap.end()){
         return false;
@@ -33,13 +34,14 @@ bool Graph::hasEdge(T& v1, T& v2) const{
     return adjMap.at(v1).find(v2) != adjMap.at(v1).end();
 }
 
-void Graph::addEdge(T& v1, T& v2){
+template <typename T>
+void Graph<T>::addEdge(const T& v1, const T& v2){
     // insert v1 and v2 to each other's pair
-    adjMap[v].insert(v1);
-    adjMap[w].insert(v2);
+    adjMap[v1].insert(v1);
+    adjMap[v2].insert(v2);
 }
 
-int Graph::BFS(T& s, T& t, map<T, int>& distance, map<T, T>& go_through) const{
+int Graph<T>::BFS(const T& s, const T& t, map<T, int>& distance, map<T, T>& go_through) const{
     // return -2 if least one of them are not in adjMap
     if(adjMap.find(s) == adjMap.end() || adjMap.find(t) == adjMap.end()){return INVALID_VERTEX;}
 
@@ -55,7 +57,7 @@ int Graph::BFS(T& s, T& t, map<T, int>& distance, map<T, T>& go_through) const{
     distance[s] = 0; // set distance of itself to 0
     go_through[s] = s;
     q.push(s);
-    char current = s;
+    T current = s;
     while(!q.empty() && current != t){
         // set current to first vertex in queue
         current = q.front();
@@ -78,3 +80,4 @@ int Graph::BFS(T& s, T& t, map<T, int>& distance, map<T, T>& go_through) const{
     return distance[t];
 }
 
+#endif
