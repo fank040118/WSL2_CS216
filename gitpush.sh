@@ -3,6 +3,15 @@
 # 切换到正确的目录
 cd /home/fank0/CS216
 
+# 检查是否使用HTTPS
+REMOTE_URL=$(git remote get-url CS216)
+if [[ $REMOTE_URL == https://* ]]; then
+    echo "检测到HTTPS URL，正在转换为SSH URL..."
+    SSH_URL="git@github.com:$(echo $REMOTE_URL | sed 's|https://github.com/||')"
+    git remote set-url CS216 "$SSH_URL"
+    echo "已将远程URL更改为: $SSH_URL"
+fi
+
 # 显示当前更改
 echo "当前更改的文件:"
 git status -s
