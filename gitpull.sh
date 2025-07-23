@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 切换到正确的目录
-cd /home/fank0/CS216
+cd /home/fank0/WSL2_CS216
 
 # 显示当前本地状态
 echo "当前本地状态:"
@@ -9,7 +9,7 @@ git status -s
 
 # 从远程仓库拉取更新
 echo "正在从GitHub拉取更新..."
-git pull CS216 master
+git pull WSL2_CS216 master
 
 # 检查上一条命令的退出状态
 if [ $? -eq 0 ]; then

@@ -24,6 +24,6 @@ rm -rf "$TARGET_DIR"/*
 
 # 复制当前目录下的所有非隐藏文件和文件夹到目标目录
 echo "正在复制文件到目标目录..."
-cp -r /home/fank0/CS216/* "$TARGET_DIR"/
+cp -r /home/fank0/WSL2_CS216/* "$TARGET_DIR"/
 
 echo "文件复制完成！文件已复制到 $TARGET_DIR"
