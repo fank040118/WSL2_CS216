@@ -52,8 +52,3 @@ else if [ $number -eq 0 ]
         echo "$number is a negative number"
     fi
 fi
-
-
-
-
-

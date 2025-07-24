@@ -54,30 +54,3 @@ coursename="CS216"
 echo 'Hello, $coursename students!'       输出 Hello, $coursename students!
 echo "Hello, $coursename students!"       输出 Hello, CS216 students！
 echo "It's fun to take \"$coursename\"."  输出 It's fun to take "CS216".
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
