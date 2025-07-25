@@ -155,20 +155,55 @@ echo "Exit status of last command: $?" # 会输出一个非零值
 - **注意**: `[` 和 `]` 与其中的条件之间必须有空格。
 
 **比较运算符:**
-- **整数比较**: `-eq` (等于), `-ne` (不等于), `-gt` (大于), `-ge` (大于等于), `-lt` (小于), `-le` (小于等于)。
-- **字符串比较**: `==` 或 `=` (等于), `!=` (不等于)。
-- **逻辑运算**: `-a` 或 `&&` (与), `-o` 或 `||` (或)。
 
+**整数比较:**
+- `-eq`: 等于 (equal)
+- `-ne`: 不等于 (not equal)  
+- `-gt`: 大于 (greater than)
+- `-ge`: 大于等于 (greater than or equal)
+- `-lt`: 小于 (less than)
+- `-le`: 小于等于 (less than or equal)
+
+**字符串比较:**
+- `==` 或 `=`: 等于
+- `!=`: 不等于
+- `<`: 小于（按字母顺序）
+- `>`: 大于（按字母顺序）
+
+**逻辑运算:**
+- `-a` 或 `&&`: 与 (AND)
+- `-o` 或 `||`: 或 (OR)
+
+**基本示例:**
 ```bash
 #!/bin/bash
-read -p "Enter a number: " num
+echo "请输入一个整数"
+read number
 
-if [ "$num" -gt 0 ]; then
-  echo "$num is positive."
-elif [ "$num" -lt 0 ]; then
-  echo "$num is negative."
+if [ $number -gt 0 ]; then
+    echo "$number 是正数"
+elif [ $number -eq 0 ]; then
+    echo "$number 是零"
 else
-  echo "The number is zero."
+    echo "$number 是负数"
+fi
+```
+
+**复合条件示例:**
+```bash
+# 与运算
+if [ $a -eq 10 ] && [ $b -eq 20 ]; then
+    echo "a等于10且b等于20"
+fi
+
+# 或运算
+if [ "$1" == "3" ] || [ "$1" == "4" ]; then
+    echo "参数是3或4"
+fi
+
+# 字符串比较
+if [ $person != "steve" ]; then
+    echo "不是steve"
 fi
 ```
 
@@ -176,22 +211,44 @@ fi
 
 用于匹配一个变量的多个可能值，是 `if/elif` 结构的一个简化。
 
+**基本语法:**
+```bash
+case 变量 in
+    模式1) 
+        statements;;
+    模式2) 
+        statements;;
+    模式3)
+        statements;;
+    ...
+    *)
+        默认命令;;
+esac
+```
+
+**重要语法特点:**
+- `case` 语句以 `esac` 结尾（case的倒写）
+- 每个分支用 `)` 结尾
+- 每个命令块都需要 `;;` 结束
+- `*` 表示默认情况（类似于其他语言的 default）
+
+**示例:**
 ```bash
 #!/bin/bash
-read -p "Enter 'start', 'stop', or 'restart': " action
+read -p "请输入 'start', 'stop', 或 'restart': " action
 
 case "$action" in
   start)
-    echo "Starting the service..."
-    ;; # 双分号表示分支结束
+    echo "正在启动服务..."
+    ;;
   stop)
-    echo "Stopping the service..."
+    echo "正在停止服务..."
     ;;
   restart)
-    echo "Restarting the service..."
+    echo "正在重启服务..."
     ;;
-  *) # * 表示默认情况
-    echo "Usage: $0 {start|stop|restart}"
+  *)
+    echo "用法: $0 {start|stop|restart}"
     ;;
 esac
 ```
@@ -200,8 +257,35 @@ esac
 
 用于遍历一个列表或范围。
 
-**1. 遍历列表:**
+**基本语法:**
 ```bash
+# 遍历列表
+for 变量 in 列表
+do
+    statements
+done
+
+# 或者遍历命令输出
+for 变量 in $(unix命令)
+do
+    statements
+done
+
+# C风格循环
+for ((i=0; i < 条件; i++))
+do
+    statements
+done
+```
+
+**1. 遍历固定列表:**
+```bash
+#!/bin/bash
+for num in {4,3,2,1}; do 
+    echo "Number: $num"
+done
+
+# 或者使用字符串列表
 for fruit in "Apple" "Banana" "Cherry"; do
   echo "I like $fruit"
 done
@@ -225,7 +309,17 @@ done
 
 当条件为真时，重复执行代码块。
 
+**基本语法:**
 ```bash
+while [ 条件 ]
+do
+    statements
+done
+```
+
+**示例:**
+```bash
+#!/bin/bash
 counter=1
 while [ $counter -le 5 ]; do
   echo "Count: $counter"
@@ -308,15 +402,43 @@ echo "Total number of fruits: ${#fruits[@]}"
 
 ## 五、调试技巧
 
+### 5.1 语法检查和跟踪
+
 - **`bash -n script.sh`**: 检查脚本的语法错误，但不执行。
 - **`bash -x script.sh`**: **跟踪模式 (Trace Mode)**。在执行前打印出每一行命令及其参数，非常适合调试。
-- **在脚本中启用/禁用跟踪**:
-  ```bash
-  set -x # 开启调试输出
-  # ... some commands ...
-  set +x # 关闭调试输出
-  ```
-- **使用 `echo`**: 在关键位置打印变量的值来检查程序流程。
-  ```bash
-  echo "DEBUG: The value of var is $var"
-  ```
+
+### 5.2 在脚本中启用/禁用跟踪
+
+```bash
+set -x # 开启调试输出
+# ... some commands ...
+set +x # 关闭调试输出
+```
+
+### 5.3 使用 echo 进行调试
+
+在关键位置打印变量的值来检查程序流程：
+```bash
+echo "DEBUG: 变量值为 $variable"
+```
+
+### 5.4 常见错误和注意事项
+
+1. **等号两侧不能有空格:**
+   - 正确: `name="John"`
+   - 错误: `name = "John"`
+
+2. **访问变量时要加 $ 符号:**
+   - 正确: `echo $name`
+   - 错误: `echo name`
+
+3. **文件权限问题:**
+   - 记得给脚本添加执行权限: `chmod +x script.sh`
+
+4. **路径问题:**
+   - 使用相对路径时要注意当前工作目录
+   - 推荐使用绝对路径或者 `$PWD` 变量
+
+5. **条件语句中的空格:**
+   - 正确: `if [ $a -eq $b ]`
+   - 错误: `if [$a -eq $b]`（缺少空格）

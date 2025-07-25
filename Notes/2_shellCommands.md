@@ -1,4 +1,169 @@
-Shell命令进阶指南——————————————————————————————————————————————————————————
+Shell命令完整指南——————————————————————————————————————————————————————————
+
+基础文件和目录操作——————————————————————————————————————————————————————————
+
+pwd (Print Working Directory) - 显示当前目录：
+    pwd                        # 显示当前工作目录的完整路径
+
+ls (List) - 列出文件和目录：
+    ls                         # 列出当前目录内容
+    ls -l                      # 显示详细信息（权限、大小、修改时间等）
+    ls -a                      # 显示所有文件（包括隐藏文件）
+    ls -la                     # 组合使用，显示所有文件的详细信息
+    ls -h                      # 以人类可读格式显示文件大小
+    ls -t                      # 按修改时间排序
+    ls -r                      # 反向排序
+    ls *.txt                   # 列出所有.txt文件
+    ls -ld directory/          # 只显示目录本身的信息
+
+cd (Change Directory) - 切换目录：
+    cd /path/to/directory      # 切换到指定目录
+    cd ~                       # 切换到家目录
+    cd                         # 同上，切换到家目录
+    cd ..                      # 返回上一级目录
+    cd ../..                   # 返回上两级目录
+    cd -                       # 返回上一个工作目录
+    cd /                       # 切换到根目录
+
+mkdir (Make Directory) - 创建目录：
+    mkdir dirname              # 创建单个目录
+    mkdir dir1 dir2 dir3       # 创建多个目录
+    mkdir -p path/to/nested/dir # 创建多级目录（父目录不存在时自动创建）
+    mkdir -m 755 dirname       # 创建目录并设置权限
+
+rmdir - 删除空目录：
+    rmdir dirname              # 删除空目录
+    rmdir -p path/to/empty/dir # 删除多级空目录
+
+基础文件操作——————————————————————————————————————————————————————————————————
+
+touch - 创建文件或更新时间戳：
+    touch filename.txt         # 创建空文件或更新现有文件的修改时间
+    touch file1.txt file2.txt  # 创建多个文件
+    touch -t 202301011200 file # 设置特定的时间戳
+
+cp (Copy) - 复制文件或目录：
+    cp source.txt dest.txt     # 复制文件
+    cp source.txt /path/to/    # 复制文件到指定目录
+    cp file1 file2 file3 dir/  # 复制多个文件到目录
+    cp -r source_dir dest_dir  # 递归复制目录
+    cp -i source dest          # 交互式复制（覆盖前询问）
+    cp -v source dest          # 显示复制过程（verbose）
+    cp -u source dest          # 只在源文件更新时才复制
+
+mv (Move) - 移动/重命名文件或目录：
+    mv oldname newname         # 重命名文件或目录
+    mv file.txt /path/to/      # 移动文件到指定目录
+    mv file1 file2 dir/        # 移动多个文件到目录
+    mv -i source dest          # 交互式移动（覆盖前询问）
+    mv -v source dest          # 显示移动过程
+
+rm (Remove) - 删除文件或目录：
+    rm filename.txt            # 删除文件
+    rm file1 file2 file3       # 删除多个文件
+    rm -i filename             # 交互式删除（删除前询问）
+    rm -f filename             # 强制删除（不询问）
+    rm -r dirname              # 递归删除目录
+    rm -rf dirname             # 强制递归删除目录（危险命令！）
+    rm *.txt                   # 删除所有.txt文件
+
+文件内容查看——————————————————————————————————————————————————————————————————
+
+cat (Concatenate) - 显示文件内容：
+    cat filename.txt           # 显示整个文件内容
+    cat file1 file2            # 显示多个文件内容
+    cat -n filename            # 显示内容并添加行号
+    cat -b filename            # 只对非空行添加行号
+    cat > newfile.txt          # 创建新文件并输入内容（Ctrl+D结束）
+    cat >> existing.txt        # 向现有文件追加内容
+
+less/more - 分页查看文件：
+    less filename.txt          # 分页查看文件（推荐）
+    more filename.txt          # 分页查看文件（较老的工具）
+    # 在less中的快捷键：
+    # q - 退出, 空格 - 下一页, b - 上一页
+    # /pattern - 搜索, n - 下一个匹配, N - 上一个匹配
+
+head - 查看文件开头：
+    head filename.txt          # 显示前10行
+    head -n 20 filename.txt    # 显示前20行
+    head -5 filename.txt       # 显示前5行
+    head -c 100 filename.txt   # 显示前100个字符
+
+tail - 查看文件结尾：
+    tail filename.txt          # 显示后10行
+    tail -n 20 filename.txt    # 显示后20行
+    tail -5 filename.txt       # 显示后5行
+    tail -f filename.txt       # 实时监控文件末尾（常用于日志文件）
+    tail -F filename.txt       # 实时监控，即使文件被重建也继续
+
+文件权限和属性——————————————————————————————————————————————————————————————————
+
+chmod (Change Mode) - 修改文件权限：
+    chmod 755 filename         # 设置权限为rwxr-xr-x
+    chmod 644 filename         # 设置权限为rw-r--r--
+    chmod u+x filename         # 为所有者添加执行权限
+    chmod g-w filename         # 移除组的写权限
+    chmod o=r filename         # 设置其他人只有读权限
+    chmod +x script.sh         # 为所有用户添加执行权限
+
+chown (Change Owner) - 修改文件所有者：
+    chown user filename        # 改变文件所有者
+    chown user:group filename  # 改变所有者和组
+    chown -R user:group dir/   # 递归改变目录及内容的所有者
+
+file - 查看文件类型：
+    file filename.txt          # 显示文件类型信息
+    file *                     # 显示当前目录所有文件的类型
+
+stat - 显示文件详细信息：
+    stat filename.txt          # 显示文件的详细统计信息
+
+基础文本处理——————————————————————————————————————————————————————————————————
+
+echo - 输出文本：
+    echo "Hello World"         # 输出文本
+    echo $HOME                 # 输出环境变量
+    echo -n "No newline"       # 输出时不换行
+    echo -e "Line1\nLine2"     # 解释转义字符
+
+grep (Global Regular Expression Print) - 搜索文本：
+    grep "pattern" filename    # 在文件中搜索模式
+    grep -i "pattern" file     # 忽略大小写搜索
+    grep -n "pattern" file     # 显示行号
+    grep -v "pattern" file     # 显示不匹配的行
+    grep -r "pattern" dir/     # 在目录中递归搜索
+    grep -c "pattern" file     # 统计匹配行数
+    grep -l "pattern" *.txt    # 只显示包含模式的文件名
+
+man (Manual) - 查看命令手册：
+    man ls                     # 查看ls命令的详细手册
+    man 5 passwd               # 查看特定章节的手册
+    man -k keyword             # 搜索包含关键字的手册页
+
+help - 获取帮助：
+    help cd                    # 获取内置命令的帮助
+    ls --help                  # 大多数命令的帮助选项
+
+历史和快捷操作——————————————————————————————————————————————————————————————————
+
+history - 命令历史：
+    history                    # 显示命令历史
+    history 10                 # 显示最近10条命令
+    !123                       # 执行历史中第123条命令
+    !!                         # 执行上一条命令
+    !grep                      # 执行最近的grep命令
+
+快捷键：
+    Ctrl+C                     # 终止当前命令
+    Ctrl+Z                     # 暂停当前命令
+    Ctrl+D                     # 退出当前shell或结束输入
+    Ctrl+L                     # 清屏（等同于clear命令）
+    Tab                        # 自动补全命令或文件名
+    ↑↓                         # 浏览命令历史
+
+clear - 清屏：
+    clear                      # 清空终端屏幕
 
 管道和重定向(Pipes and Redirection)——————————————————————————————————————————
 管道 | 用于将一个命令的输出作为另一个命令的输入：
