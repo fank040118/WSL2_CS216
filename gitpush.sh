@@ -4,11 +4,11 @@
 cd /home/fank0/WSL2_CS216
 
 # 检查是否使用HTTPS
-REMOTE_URL=$(git remote get-url origin)
+REMOTE_URL=$(git remote get-url WSL2_CS216)
 if [[ $REMOTE_URL == https://* ]]; then
     echo "检测到HTTPS URL，正在转换为SSH URL..."
     SSH_URL="git@github.com:$(echo $REMOTE_URL | sed 's|https://github.com/||')"
-    git remote set-url origin "$SSH_URL"
+    git remote set-url WSL2_CS216 "$SSH_URL"
     echo "已将远程URL更改为: $SSH_URL"
 fi
 
@@ -45,6 +45,6 @@ git commit -m "$commit_message"
 
 # 推送到远程
 echo "正在推送到 GitHub..."
-git push origin main
+git push WSL2_CS216 master
 
 echo "完成!"
