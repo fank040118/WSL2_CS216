@@ -4,11 +4,11 @@
 cd /home/fank0/WSL2_CS216
 
 # 检查是否使用HTTPS
-REMOTE_URL=$(git remote get-url WSL2_CS216)
+REMOTE_URL=$(git remote get-url origin)
 if [[ $REMOTE_URL == https://* ]]; then
     echo "检测到HTTPS URL，正在转换为SSH URL..."
     SSH_URL="git@github.com:$(echo $REMOTE_URL | sed 's|https://github.com/||')"
-    git remote set-url WSL2_CS216 "$SSH_URL"
+    git remote set-url origin "$SSH_URL"
     echo "已将远程URL更改为: $SSH_URL"
 fi
 
@@ -28,13 +28,23 @@ else
 fi
 
 # 提示输入提交消息
-read -p "请输入提交信息: " commit_message
+echo "正在打开编辑器输入提交信息..."
+temp_file=$(mktemp)
+${EDITOR:-nano} "$temp_file"
+commit_message=$(cat "$temp_file")
+rm "$temp_file"
+
+# 检查是否输入了提交信息
+if [ -z "$commit_message" ]; then
+    echo "未输入提交信息，脚本退出"
+    exit 1
+fi
 
 # 提交更改
 git commit -m "$commit_message"
 
 # 推送到远程
 echo "正在推送到 GitHub..."
-git push WSL2_CS216 master
+git push origin main
 
 echo "完成!"
